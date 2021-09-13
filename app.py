@@ -53,25 +53,21 @@ def index():
     crsr = connection.cursor()
     if request.method == "POST":
          sym = request.form.get("symbol")
-        
-         crsr.execute("INSERT INTO names(symbol) values(?)",(sym,))
+        # execute the command to fetch all the data from the table emp
+         crsr.execute("SELECT * FROM names")
+
+        # store all the fetched data in the ans variable
+         data = crsr.fetchall()
+         chk=1
+         for name in data:
+             if str(name[1])==str(sym):
+                 chk=0
+                 
+
+         if chk:
+              crsr.execute("INSERT INTO names(symbol) values(?)",(sym,))
          redirect("/")
-        #  # execute the command to fetch all the data from the table emp
-        #  crsr.execute("SELECT * FROM names")
-
-        #  # store all the fetched data in the ans variable
-        #  data = crsr.fetchall()
-
-        #  prices=[]
-        #  for name in data:
-        #     item=lookup(name[1])
-        #     prices.append(item)
-
-        #  connection.commit()
-  
-        #  # Close the connection
-        #  connection.close()
-        #  return render_template("index.html", prices=prices)
+         
 
 
 
