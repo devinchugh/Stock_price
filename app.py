@@ -10,8 +10,6 @@ from flask import Flask, flash, redirect, render_template, request, session
 app = Flask(__name__)
 
 
-
-
 def lookup(symbol):
     """Look up quote for symbol."""
 
@@ -40,8 +38,9 @@ def usd(value):
     """Format value as USD."""
     return f"${value:,.2f}"
 
+
 # Custom filter
-app.jinja_env.filters["usd"] = usd    
+app.jinja_env.filters["usd"] = usd
 
 
 @app.route("/", methods=["GET", "POST"])
@@ -52,26 +51,35 @@ def index():
     # cursor object
     crsr = connection.cursor()
     if request.method == "POST":
-         sym = request.form.get("symbol")
-        # execute the command to fetch all the data from the table emp
-         crsr.execute("SELECT * FROM names")
+        sym = request.form.get("symbol")
+        form_name = request.form.get("form-name")
+        if form_name == "form1":
+            # execute the command to fetch all the data from the table emp
+            crsr.execute("SELECT * FROM names")
 
-        # store all the fetched data in the ans variable
-         data = crsr.fetchall()
-         chk=1
-         for name in data:
-             if str(name[1])==str(sym):
-                 chk=0
-                 
+            # store all the fetched data in the ans variable
+            data = crsr.fetchall()
+            chk = 1
+            for name in data:
+                if str(name[1]) == str(sym):
+                    chk = 0
 
-         if chk:
-              crsr.execute("INSERT INTO names(symbol) values(?)",(sym,))
-         redirect("/")
-         
+            if chk:
+                crsr.execute("INSERT INTO names(symbol) values(?)", (sym,))
+            redirect("/")
 
+        else:
+            # execute the command to fetch all the data from the table emp
+            crsr.execute("SELECT * FROM names WHERE symbol=?", (sym,))
 
+            # store all the fetched data in the ans variable
+            data = crsr.fetchall()
 
-    
+            if len(data)==1:
+                crsr.execute("DELETE FROM names WHERE symbol=?",(sym,))
+
+            redirect("/")    
+
 
 # execute the command to fetch all the data from the table emp
     crsr.execute("SELECT * FROM names")
@@ -79,15 +87,13 @@ def index():
 # store all the fetched data in the ans variable
     data = crsr.fetchall()
 
-    prices=[]
+    prices = []
     for name in data:
-        item=lookup(name[1])
+        item = lookup(name[1])
         prices.append(item)
 
     connection.commit()
-  
+
     # Close the connection
     connection.close()
     return render_template("index.html", prices=prices)
-
-
