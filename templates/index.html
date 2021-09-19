@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=3.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>What's my stock Prices?</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.css" />
@@ -48,7 +48,9 @@
                           <tr>
                             <th>Symbol</th>
                             <th>Name</th>
-                            <th>Price</th>
+                            <th>Opening Price</th>
+                            <th>Closing Price</th>
+                            <th>Current Price</th>
                           </tr>
                         </thead>
                         <tbody>
@@ -56,6 +58,8 @@
                           <tr>
                             <td>{{item.symbol}}</td>
                             <td>{{item.name}}</td>
+                            <td>{{ item.open | usd}}</td>
+                            <td>{{ item.close | usd}}</td>
                             <td>{{ item.price | usd}}</td>
                             
                           </tr>
@@ -67,7 +71,8 @@
             </div>
         </div>
     </section>
-    <footer class="footer">
+    <footer class="small text-center text-muted">
+        Data provided for free by <a href="https://iextrading.com/developer">IEX</a>. View <a href="https://iextrading.com/api-exhibit-a/">IEX’s Terms of Use</a>.
     </footer>
 </body>
 
