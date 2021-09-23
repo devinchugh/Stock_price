@@ -28,8 +28,10 @@ def lookup(symbol):
         return {
             "name": quote["companyName"],
             "price": float(quote["latestPrice"]),
-            "open": float(quote["open"]),
-            "close": float(quote["close"]),
+            "high": float(quote["week52High"]),
+            "low": float(quote["week52Low"]),
+            "market":quote["isUSMarketOpen"],
+           
             "symbol": quote["symbol"]
         }
     except (KeyError, TypeError, ValueError):

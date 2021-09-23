@@ -40,17 +40,18 @@
     </section>
     <section class="section">
         <div class="container">
-            <div class="columns">
-                <div class="column is-offset-4 is-4">
+            <div >
+                <div >
                     
-                    <table class="table">
+                    <table class="table table-striped" >
                         <thead>
                           <tr>
-                            <th>Symbol</th>
-                            <th>Name</th>
-                            <th>Opening Price</th>
-                            <th>Closing Price</th>
+                            <th>Symbol</th>    
+                            <th>Name</th>     
+                            <th>Highest Price of Past 52 Weeks</th>
+                            <th>Lowest Price of Past 52 Weeks</th>
                             <th>Current Price</th>
+                            <th>US Market Open</th>
                           </tr>
                         </thead>
                         <tbody>
@@ -58,9 +59,11 @@
                           <tr>
                             <td>{{item.symbol}}</td>
                             <td>{{item.name}}</td>
-                            <td>{{ item.open | usd}}</td>
-                            <td>{{ item.close | usd}}</td>
+                            
+                            <td>{{ item.high | usd}}</td>
+                            <td>{{ item.low | usd}}</td>
                             <td>{{ item.price | usd}}</td>
+                            <td>{{item.market}}</td>
                             
                           </tr>
                           {% endfor %}
