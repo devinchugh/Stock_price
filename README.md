@@ -11,3 +11,9 @@ The project mainly uses Flask for backend and sqlite as database. The frontend o
 My main motive behind this application is that when I have some stock bought and I wish to see their consolidated prices at one place and watch them in real time, there is no place to go to. This web app allowed me to do that using only some lines of code and a little logic.
 
 Have a look over the code and improvements are heartly Welcomed.
+
+<b>Details of the Files in Project:<b/>
+  1-static/style.css: This file contains the frontend styling for the Web application apart from the bootstrap utilised in designing.
+  2-templates/index.html: This file contains the HTML for the homepage of the web application.
+  3-app.py: This file contains all the code for backend consisting of the main logic and flask which makes the web application dynamic.
+  4-myTable.db: This file is the database for this project containing the table to store the stocks which the user wish to moniter.
