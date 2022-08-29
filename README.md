@@ -1,5 +1,5 @@
 # Stock_price
-This will do the basic task of showing the Stock Prices for the stocks-added.
+This app does the basic task of showing the Stock Prices for the stocks-added.
 
 Video Explaining Project: https://youtu.be/CK5WG3NKcVw
 
